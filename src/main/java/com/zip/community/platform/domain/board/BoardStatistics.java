@@ -1,10 +1,8 @@
 package com.zip.community.platform.domain.board;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
 @Builder
 public class BoardStatistics {
@@ -21,12 +19,8 @@ public class BoardStatistics {
             .build();
     }
 
-    public void addViewCount() {
-        this.viewCount++;
-    }
-
-    public void removeViewCount() {
-        this.viewCount--;
+    public void changeViewCount(long viewCount) {
+        this.viewCount = viewCount;
     }
 
     public void addCommentCount() {
@@ -37,11 +31,19 @@ public class BoardStatistics {
         this.commentCount--;
     }
 
-    public void addLikeCount() {
-        this.likeCount++;
+    public void changeLikeCount(long likeCount) {
+        this.likeCount = likeCount;
     }
 
-    public void removeLikeCount() {
-        this.likeCount--;
+    public void bindStatistics(long viewCount, long commentCount, long likeCount) {
+        this.viewCount = viewCount;
+        this.commentCount = commentCount;
+        this.likeCount = likeCount;
     }
+
+    public void bindViewAndLikeStatistics(long viewCount,long likeCount, long diskLikeCount) {
+        this.viewCount = viewCount;
+        this.likeCount = likeCount - diskLikeCount;
+    }
+
 }
